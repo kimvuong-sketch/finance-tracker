@@ -1,0 +1,17 @@
+# Never commit real bank data
+*.csv
+*.xlsx
+*.xls
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv/
+
+# Mac
+.DS_Store
+.~lock.*
+
+# Streamlit secrets (if you add them locally)
+.streamlit/secrets.toml

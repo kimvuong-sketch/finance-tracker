@@ -1,0 +1,70 @@
+{
+  "zelle_registry": {
+    "version": "1.0",
+    "last_updated": "2026-06-04 (Joel Leong, Mohan K, Trinity Nguyen added)",
+    "description": "REFERENCE ONLY — human-readable summary of Zelle people and their categories. The app does NOT read this file. All rules that affect the dashboard live in merchant_rules.json. This file exists so you and the agent can quickly review who is mapped to what without reading the full rulebook.",
+
+    "classification_rules": {
+      "entertainment": {
+        "description": "Only classify Zelle as Entertainment if explicitly for fun: concert tickets, event booths, splitting a fun outing.",
+        "not_entertainment": ["Rent payments", "Family support", "Reimbursements"]
+      },
+      "unknown_policy": "Any Zelle recipient NOT in confirmed_people must be flagged as Unknown / Needs Review. Never auto-assign Entertainment to Zelle payments."
+    },
+
+    "confirmed_people": [
+      {
+        "name": "Joel Leong",
+        "name_patterns": ["JOEL LEONG", "Joel Leong"],
+        "category": "Entertainment",
+        "subcategory": "Entertainment",
+        "confidence": "high",
+        "rule": "All Zelle payments to Joel Leong = Entertainment. User confirmed.",
+        "date_learned": "2026-06-04",
+        "notes": "Payments seen: $1,006.50 (05/19) and $30.00 (05/01). Classify all future Zelle to Joel Leong as Entertainment."
+      },
+      {
+        "name": "Mohan K",
+        "name_patterns": ["Mohan K", "MOHAN K"],
+        "category": "Entertainment",
+        "subcategory": "Entertainment",
+        "confidence": "high",
+        "rule": "All Zelle payments to Mohan K = Entertainment. User confirmed.",
+        "date_learned": "2026-06-04",
+        "notes": "Payment seen: $82.30 (05/19). Classify all future Zelle to Mohan K as Entertainment."
+      },
+      {
+        "name": "Trinity Nguyen",
+        "name_patterns": ["Trinity Nguyen", "TRINITY NGUYEN"],
+        "category": "Entertainment",
+        "subcategory": "Entertainment",
+        "confidence": "high",
+        "rule": "All Zelle payments to Trinity Nguyen = Entertainment. User confirmed.",
+        "date_learned": "2026-06-04",
+        "notes": "Payment seen: $300.00 (05/07). Classify all future Zelle to Trinity Nguyen as Entertainment."
+      },
+      {
+        "name": "Riya",
+        "name_patterns": ["Riya", "RIYA"],
+        "category": "Housing > Rent",
+        "subcategory": "Rent",
+        "confidence": "high",
+        "rule": "All Zelle payments to Riya = Housing > Rent. She is a roommate/landlord.",
+        "date_learned": "2026-06-04",
+        "notes": "Multiple payments per month. $500 recurring + occasional large amounts. Do NOT classify as Entertainment."
+      }
+    ],
+
+    "unknown_people": [
+    ],
+
+    "available_categories": [
+      "Housing > Rent",
+      "Entertainment",
+      "Income > Family Support",
+      "Food / Eat Out",
+      "Personal",
+      "Unknown / Needs Review"
+    ]
+  }
+}

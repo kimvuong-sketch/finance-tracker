@@ -1,0 +1,537 @@
+{
+  "_readme": "This is your category rulebook. To add a new merchant, copy any block and change the keywords and category. No coding needed.",
+  "rules": [
+    {
+      "keywords": ["RILEY TRINH", "MADISON LEE"],
+      "group": "Food",
+      "category": "Food / Eat Out",
+      "confidence": "high",
+      "_note": "Riley Trinh and Madison Lee Zelle payments = Food / Eat Out. Must appear BEFORE the Entertainment friends block."
+    },
+    {
+      "keywords": ["JOEL LEONG", "MOHAN K JPM", "JASMINE UCI", "JASMINE UC", "ALEXIS JPM", "LUCIA A MORALES", "LUCIA MORALES", "NGOC DIEM", "QUYNH PHU", "MINH TO", "THIEN MINH MAI", "GARY 227"],
+      "group": "Personal",
+      "category": "Entertainment",
+      "confidence": "high",
+      "_note": "Friends — Zelle payments in or out for shared expenses"
+    },
+    {
+      "keywords": [
+        "QUYEN", "OLIVIA ZHANG", "CHASE GRANDPRE", "MINH QUAN", "QUI PHAM", "NHAT AN NGUYEN",
+        "TRINITY NGUYEN", "MINH ANH UCI", "BAO NGHI TRAN",
+        "TIEN THI THAO HUYNH", "TIEN THI THAO", "NGOC BAO KHANH HOANG", "KHANH HOANG",
+        "MINH ANH PHAM", "JEREMY BASILIO", "LAUREN DURHAM",
+        "MICHELLE CHOY", "MEG PHAM", "MEGAN DINH",
+        "JUSTIN PARK", "BRIANNA", "BINH MINH DUONG",
+        "STEPHEN NGUYEN", "HAZEL TM AN", "DANICA DAGOSTINO", "AIDAN JAYAKUMAR",
+        "FAITH UCI", "VIGGO NGUYEN", "CRYSTAL", "JUSTINE",
+        "SUZANNA SON", "DANA JAJAWE", "CHRISTOPHER MONACHELLI",
+        "TIFFANY ZHANG", "JOSEPH WHITTAKER", "KAITLYN", "YAZHUO WU",
+        "SHAYLA", "QIU HAN WANG", "SANIKA SAITAWDEKAR", "JENNY XU",
+        "MY-NGOC NGUYEN", "AUDREY CHOI", "AARON PARK",
+        "REKIK FIKRE", "GAYATHRI VISWANATH", "GIA BAO KHANH TRAN",
+        "DOANH HO", "PAUL AYIN", "INGRID CHANAS HENRIQUEZ",
+        "ETHANN MICHAEL", "GAVIN HUANG", "MADELEINE CHEN",
+        "JASON PHAM", "ETHAN NGUYEN", "NGOC Y DAO", "HOI LAM TAM",
+        "JIAXIN XU", "HILDA GOMEZ", "GEORGIA STAVROS", "ZACH BOSA",
+        "TAM NGUYEN", "VIC HONG", "KAILYN", "KYLE",
+        "SAMANTHA SUGINO", "JASMINE CHU", "MEGAN THI DINH",
+        "KHANG NGUYEN", "KHANG NGUYEN UCI", "ATHEN LUONG", "ATHENA LUONG",
+        "ELISSA UCI", "SABRINA 180DC", "SAMANTHA", "SYDNEY",
+        "ETHAN NGUYEN", "PAUL IVAN", "CHRIS JPM99", "HOI LAM JPM"
+      ],
+      "group": "Personal",
+      "category": "Entertainment",
+      "confidence": "high",
+      "_note": "Friends — Zelle/Venmo payments in or out for shared expenses and reimbursements"
+    },
+    {
+      "keywords": ["VENMO *", "VENMO*"],
+      "group": "Personal",
+      "category": "Entertainment",
+      "confidence": "medium",
+      "_note": "Venmo payments — usually friend splits. Specific known contacts have higher-priority rules above."
+    },
+    {
+      "keywords": ["UNIVERSITY OF CA", "UNIVERSITY OF CALIFORNIA", "UC IRVINE PAYROLL", "UCI PAYROLL", "REGENTS OF UC"],
+      "group": "Income",
+      "category": "Paycheck",
+      "confidence": "high",
+      "_note": "On-campus job salary"
+    },
+    {
+      "keywords": ["PAYPAL *REFORMATION", "REFORMATION"],
+      "group": "Income",
+      "category": "Refund",
+      "confidence": "high",
+      "_note": "Reformation refund via PayPal"
+    },
+    {
+      "keywords": ["ME BE", "A USA", "HANH VO", "ANH VO", "NGOC PHUONG HANH VO", "NGOC PHUONG", "GIA THIEN VUONG", "D HAI USA", "GUN HUYNH", "CATHERINE NGUYEN", "CH THO CATHERINE", "CATH NGUYEN"],
+      "group": "Income",
+      "category": "Family Support",
+      "confidence": "high",
+      "_note": "Kim's family — parents (Hanh Vo / Ngoc Phuong Hanh Vo / Anh Vo), relatives. In or out with any of them."
+    },
+    {
+      "keywords": ["CHIPS CREDIT VIA: CITIBANK", "CHIPS CREDIT", "WIRE TRANSFER IN", "INTL WIRE"],
+      "group": "Income",
+      "category": "Consulting",
+      "confidence": "high",
+      "_note": "Large international wire transfers — Singapore consulting income"
+    },
+    {
+      "keywords": ["ALCHEMY ASIA", "SINGAPORE"],
+      "group": "Income",
+      "category": "Consulting",
+      "confidence": "high",
+      "_note": "Singapore consulting income"
+    },
+    {
+      "keywords": ["PAYROLL", "DIRECT DEP", "ADP", "GUSTO", "PAYCHEX", "PAYCHECK"],
+      "group": "Income",
+      "category": "Paycheck",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["DOMESTIC INCOMING WIRE FEE", "INTERNATIONAL INCOMING WIRE FEE", "FOREIGN EXCHANGE RATE ADJUSTMENT FEE", "WIRE FEE", "INCOMING WIRE FEE"],
+      "group": "Other",
+      "category": "Bank Fees",
+      "confidence": "high",
+      "_note": "Bank fees — foreign exchange rate adjustment from international card use (Europe/Asia travel) and wire transfer fees. Small amounts, not real spending."
+    },
+    {
+      "keywords": ["HENDIRA"],
+      "group": "Housing",
+      "category": "Utilities",
+      "confidence": "high",
+      "_note": "Monthly utility payment"
+    },
+    {
+      "keywords": ["RENT", "APARTMENT", "PROPERTY MGMT", "GREYSTAR", "EQUITY RESIDENTIAL", "PYL*AMERICAN CAMPUS", "AMERICAN CAMPUS CO", "AARON JAMES JOHNSON", "AARON JOHNSON", "RIYA JPM"],
+      "group": "Housing",
+      "category": "Rent",
+      "confidence": "high",
+      "_note": "PYL*American Campus Co is Kim's student housing complex"
+    },
+    {
+      "keywords": ["PG&E", "SCE", "SDGE", "CON ED", "ELECTRIC", "GAS COMPANY", "WATER BILL", "UTILITY"],
+      "group": "Housing",
+      "category": "Utilities",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["AT&T", "VERIZON", "T-MOBILE", "COMCAST", "XFINITY", "SPECTRUM", "INTERNET"],
+      "group": "Housing",
+      "category": "Internet",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "DOORDASH", "UBER EATS", "GRUBHUB", "POSTMATES", "INSTACART PICKUP",
+        "CHICK-FIL-A", "MCDONALD", "CHIPOTLE", "PANDA EXPRESS", "SUBWAY",
+        "TACO BELL", "BURGER KING", "IN-N-OUT", "FIVE GUYS", "RAISING CANE",
+        "WINGSTOP", "JERSEY MIKE", "PANERA", "SHAKE SHACK",
+        "CAVA", "BLUE BOWL", "PRESSED JUICERY",
+        "NOBU ", "BELGIAN WAFFLES", "SMULLERS", "MV DIVINA", "CATHEDRALE BXL",
+        "LA CORBEILLE", "LS BIGGCAKE", "FUNAMBULE", "SIN YA BRUXEL",
+        "ELISABETHTER HOF", "LEONIDAS", "KELCH ", "SHOP AND GO",
+        "SHEN HENG CHANG", "KAIXO ", "LS THE SWEETS",
+        "YU CAKE", "THE BURNT GROUP", "MELO MELO",
+        "SNACK* 3CAT", "SQ *(FULLERTON) MADE CO",
+        "VIVOT LLC"
+      ],
+      "group": "Food",
+      "category": "Food / Eat Out",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "TST*", "VILAND", "SWEETGREEN", "OZEN SUSHI", "PHOHOLIC", "PHO", "RAMEN", "SUSHI", "SHABU",
+        "DA VIEN", "DAVIEN", "CINNABON", "EAST COAST BAGEL", "QUAN MII", "BAGEL",
+        "POKE TIKI", "ITS RAW POKE", "POKEWORKS", "PEPPER LUNCH", "BRODARD",
+        "AN VAT OC", "CHAN CHAN", "DOSE IN THE BOX", "PIGGY PIGGY PEARL",
+        "BEARD PAPA", "TACOS LOS CHOLOS", "EL FAVORITO", "JAMBA JUICE",
+        "EASTERN TALES", "DOLCE MONACHELLI", "YINTANG", "CORNER BAKERY",
+        "ELLER BAKERY", "JANE'S CORNDOGS", "DEL TACO", "SQ *TRAXX",
+        "LITTLE JOHN'S ENGLISH", "SAIGON", "HOKKAIDO SAI GON",
+        "MASHTI MALONE", "ARAMARK", "MELOMELO", "PIGGY PIGGY",
+        "DUCK DONUTS", "SEASIDE DONUTS", "PINK PIG",
+        "SQ *SOMISOMI", "SOMISOMI", "HANDEL'S HOMEMAD",
+        "YOGURT AMERICA", "WANDERLUST CREAMERY",
+        "HOUSE OF FRIES", "FIRMA STROOP", "RESTAURANT DE KOLK",
+        "LE ROY D ESPAGNE", "REFFEN", "FIASCHETTERIA", "SEAFOOD BAR"
+      ],
+      "group": "Food",
+      "category": "Food / Eat Out",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "BLK DOT COFFEE", "WHITE SPARROW", "SHARETEA", "TP TEA", "SNACK* SHARETEA", "BOBII", "TEASPOON",
+        "MOCHINUT", "DUNKIN", "OMOMO TEA",
+        "WORK IN PROGRESS", "BUENAS COFFEE", "DING TEA",
+        "STEREOSCOPE COFFEE", "MIRAKURU TEA", "MOONGOAT COFFEE",
+        "RE CA PHE", "TOUS LES JOURS", "CHAILO COFFEE",
+        "FREELANCE COFFEE", "HERST COFFEE", "FEBE COFFEE",
+        "MOTORING COFFEE", "PRESS & MOKA", "CORTADO COFFEE",
+        "ARABICA", "TEA GUYS", "HEYTEA", "REDSTRAW TEA",
+        "NEWPORT COFFEE", "MILK & COOKIES", "MONKEY PANTS",
+        "INGEBORG", "LAGKAGEHUSET", "AMORINO", "TIRAMISUPER",
+        "ATELIER ARABICA", "SUMUP *ATELIER", "MY LITTLE CUP",
+        "GAAGADE KAFFE", "LADUREE", "KARDINAAL"
+      ],
+      "group": "Food",
+      "category": "Coffee and Matcha",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "STARBUCKS", "MATCHA", "BOBA", "BUBBLE TEA", "TIGER SUGAR",
+        "KUNG FU TEA", "GONG CHA", "HAPPY LEMON", "7 LEAVES",
+        "COFFEE BEAN", "DUTCH BROS", "PEET", "PHILZ", "BLUE BOTTLE",
+        "COUPA", "CAFE", "CAFFE", "NOOK COFFEE", "COFFEE BAR",
+        "COFFEE HOUSE", "URTH CAFFE", "ALFRED", "VERVE", "GROUNDWORK"
+      ],
+      "group": "Food",
+      "category": "Coffee and Matcha",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["DUNKIN", "OMOMO TEA"],
+      "group": "Food",
+      "category": "Coffee and Matcha",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "TRADER JOE", "WHOLE FOODS", "SAFEWAY", "KROGER", "VONS",
+        "RALPHS", "SPROUTS", "H MART", "99 RANCH", "MITSUWA",
+        "COSTCO", "WALMART GROCERY", "TARGET GROCERY", "ALDI",
+        "GROCERY", "SUPERMARKET", "FOOD MAXX", "ALBERTSONS",
+        "TOKYO CENTRAL", "NIJIYA", "MARUKAI", "RANCH 99",
+        "WALMART PAY", "WALMART", "WM SUPERCENTER",
+        "ALBERT HEIJN", "CARREFOUR", "TANAKA FARMS"
+      ],
+      "group": "Food",
+      "category": "Groceries",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["UBER"],
+      "group": "Transportation",
+      "category": "Uber",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["LYFT", "ZIPCAR"],
+      "group": "Transportation",
+      "category": "Rideshare",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["CHEVRON", "SHELL", "ARCO", "EXXON", "MOBIL", "VALERO", "76 GAS", "CIRCLE K GAS", "BP GAS", "FUEL", "GASOLINE", "CHARGEPOINT"],
+      "group": "Transportation",
+      "category": "Gas",
+      "confidence": "high",
+      "_note": "ChargePoint is EV charging — equivalent to gas"
+    },
+    {
+      "keywords": ["PARKING", "PARKWHIZ", "SPOTHERO", "PARKMOBILE", "METER", "OC REGIONAL PARKS", "GLF*RANCHO"],
+      "group": "Transportation",
+      "category": "Parking",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["METRO", "BART", "CALTRAIN", "MUNI", "TAP CARD", "TRANSIT", "BUS PASS", "AMSTERDAM CS"],
+      "group": "Transportation",
+      "category": "Public Transit",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["GEICO", "STATE FARM", "PROGRESSIVE", "ALLSTATE", "FARMERS", "AAA", "AUTO INSURANCE", "CAR INSURANCE"],
+      "group": "Transportation",
+      "category": "Insurance",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["FD *CA DMV", "CA DMV", "DMV"],
+      "group": "Transportation",
+      "category": "Parking",
+      "confidence": "medium",
+      "_note": "DMV registration/title fees"
+    },
+    {
+      "keywords": ["JADE NGUYEN", "JADE JPM99", "VFS SERVICE"],
+      "group": "Transportation",
+      "category": "Parking",
+      "confidence": "medium",
+      "_note": "Jade Nguyen = driving instructor lessons. VFS Service = visa application fee. Both are one-time transportation/travel fees."
+    },
+    {
+      "keywords": ["QUICKQUACK"],
+      "group": "Transportation",
+      "category": "Gas",
+      "confidence": "medium",
+      "_note": "QuickQuack car wash"
+    },
+    {
+      "keywords": [
+        "TUITION", "REGISTRATION FEE", "FINANCIAL AID", "STUDENT LOAN",
+        "FASFA", "BURSAR", "UCI FEES", "UC IRVINE FEE", "UNIVERSITY FEE",
+        "STUDENT FEE", "UCI SUMMER SESSION", "SUMMER SESSION"
+      ],
+      "group": "Education",
+      "category": "Tuition",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "CHEGG", "VITALSOURCE", "BOOKSTORE", "CAMPUS STORE",
+        "UCI BKSTORE", "ARA UCI", "WW NORTON", "NORTON",
+        "HARVBUSPUBL", "HARVARD BUSINESS"
+      ],
+      "group": "Education",
+      "category": "Books",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "ADOBE", "MICROSOFT 365", "NOTION", "ZOOM", "SLACK", "GITHUB",
+        "APPLE.COM", "APPLE.COM/BILL", "APPLE.COM/US", "APPS.APPLE",
+        "POPPIN", "INSTA360", "ALLTRAILS", "SIMPLIFY.JOBS",
+        "PAYPAL *QUIZLET", "QUIZLET.COM",
+        "PAYPAL *HELPCOURSER", "HELPCOURSER",
+        "PAYPAL *WEPA CAMPUS", "WEPA CAMPUS"
+      ],
+      "group": "Subscriptions",
+      "category": "Apps",
+      "confidence": "high",
+      "_note": "WEPA is UCI campus printing. HelpCourser is Coursera. Quizlet and Alltrails are app subscriptions."
+    },
+    {
+      "keywords": [
+        "ADOBE", "MICROSOFT 365", "NOTION", "ZOOM", "SLACK", "GITHUB",
+        "PAYPAL *CENGAGELEAR", "CENGAGELEAR", "CENGAGE",
+        "PAYPAL *MCGRAWHILLG", "MCGRAWHILLG", "MCGRAW HILL"
+      ],
+      "group": "Education",
+      "category": "Software",
+      "confidence": "high",
+      "_note": "Cengage and McGraw-Hill are textbook/course platforms"
+    },
+    {
+      "keywords": ["NETFLIX", "HULU", "DISNEY PLUS", "HBO MAX", "MAX.COM", "PEACOCK", "PARAMOUNT", "APPLE TV", "YOUTUBE PREMIUM", "CRUNCHYROLL", "SPOTIFY", "APPLE MUSIC", "TIDAL", "SOUNDCLOUD", "AMAZON PRIME", "AMAZON VIDEO", "PRIME VIDEO"],
+      "group": "Subscriptions",
+      "category": "Streaming",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["LINKEDIN"],
+      "group": "Subscriptions",
+      "category": "LinkedIn",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["CHATGPT", "OPENAI", "CLAUDE", "ANTHROPIC", "PERPLEXITY", "MIDJOURNEY", "CURSOR", "NOTION AI", "COPILOT"],
+      "group": "Subscriptions",
+      "category": "AI Tools",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["ICLOUD", "GOOGLE ONE", "DROPBOX", "ONEDRIVE"],
+      "group": "Subscriptions",
+      "category": "Cloud Storage",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["PLANET FITNESS", "EQUINOX", "24 HOUR FITNESS", "LA FITNESS", "CRUNCH GYM", "ANYTIME FITNESS", "GYM", "JUPITER YOGA", "CLR*CLUBPILATE", "CLUBPILATES", "HANGAR 18", "CLASSPASS", "CLASS PASS"],
+      "group": "Subscriptions",
+      "category": "Gym",
+      "confidence": "high",
+      "_note": "Yoga, pilates, climbing — all fitness/gym category"
+    },
+    {
+      "keywords": [
+        "VICTORIA'S SECRET", "VICTORIAS SECRET",
+        "ZARA", "H&M", "UNIQLO", "SHEIN", "NORDSTROM", "MACY",
+        "FOREVER 21", "ASOS", "NIKE", "ADIDAS",
+        "POLO FACTORY", "AERIE", "AMERICAN EAGLE", "HOLLISTER",
+        "ABERCROMBIE", "GAP", "BANANA REPUBLIC", "OLD NAVY",
+        "EXPRESS", "LULULEMON", "PACSUN", "URBAN OUTFITTERS",
+        "PAYPAL *CHARLESKEIT", "CHARLESKEIT",
+        "PAYPAL *ON SPORTSWE", "ON SPORTSWE",
+        "CITADEL OUTLETS", "OUTLETS",
+        "BRANDY MELVILLE", "BRANDY MEL",
+        "FREE PEOPLE", "PRINCESS POLLY", "REVOLVE",
+        "TJ MAXX", "TJMAXX",
+        "COS  0883", "STUSSY",
+        "SP MOTELROCKS", "MOTELROCKS",
+        "SP EDIKTED", "EDIKTED",
+        "RAPHA RACING", "RAPHA",
+        "NUDE PROJECT",
+        "SP WOLFPAK", "WOLFPAK",
+        "PAYPAL *SKIMS", "SKIMS",
+        "PAYPAL *JR EDITION", "JR EDITION",
+        "DFS LOS ANGELES", "HUDSONNEWS",
+        "LAX ISTORE",
+        "NL0701 - ARKET", "ARKET",
+        "SUMMERBIRD", "BISCUITERIE DANDOY",
+        "MOON Z BRUXELLES"
+      ],
+      "group": "Personal",
+      "category": "Clothing",
+      "confidence": "high"
+    },
+    {
+      "keywords": [
+        "WALGREENS", "CVS", "RITE AID",
+        "L'OCCITANE", "LOCCITANE", "SEPHORA", "ULTA",
+        "BATH & BODY", "BATH AND BODY",
+        "PAYPAL *BATHBODYWOR", "BATHBODYWOR",
+        "LOREAL *KERASTASE", "KERASTASE",
+        "VAGARO_*", "VAGARO*", "THREE M SALO", "THREE M SALON",
+        "NAILOLOGY SPA",
+        "EUROPEAN MARKET-HAIRSTU",
+        "PAYPAL *POWERBEAUTY", "POWERBEAUTY"
+      ],
+      "group": "Personal",
+      "category": "Grooming",
+      "confidence": "high",
+      "_note": "Salons, nail spas, hair care, skincare, beauty products"
+    },
+    {
+      "keywords": [
+        "WASH LAUNDRY", "LAUNDRY", "COIN LAUNDRY", "LAUNDROMAT"
+      ],
+      "group": "Housing",
+      "category": "Living",
+      "confidence": "high",
+      "_note": "Laundry — Housing > Living. Counts toward housing and living costs, not personal grooming."
+    },
+    {
+      "keywords": [
+        "AMC", "REGAL", "CINEMARK", "EVENTBRITE", "TICKETMASTER",
+        "STUBHUB", "CONCERT", "FESTIVAL",
+        "SIXFLAGS", "SIX FLAGS", "SFMM", "SIXFLAGS MM",
+        "LIVING DESERT ZOO",
+        "DAISO", "MINISO",
+        "DOLLAR TREE", "DOLLARTREE",
+        "SAIGON BILLIARDS",
+        "SCHOOLFUNDR",
+        "LADERACH", "BOOTH BY BRYANT", "BOOTHBYBRYANT",
+        "BOOMERS", "RANCHO SAN JOAQUIN",
+        "YOGURTLAND", "INSOMNIA COOKIES",
+        "SWEETFIN", "ACAI",
+        "BLUE BOWL", "PRESSED JUICERY",
+        "PI DELTA CHAPTER",
+        "PAYPAL *NBCF", "BREAST CANCER ANGELS", "SCHOOLFUNDR",
+        "GROOVY TOURS", "VIATORTRIPADVISOR",
+        "HUDSONNEWS", "OFD - SOURCE MALL",
+        "MOLENMUSEUM", "ZAANSE SCHANS",
+        "MY-TRIP-ONLINE", "VIATOR",
+        "FOTO DE BOER", "UP EVENTS",
+        "TAXIDIENST", "TAXA 4X35",
+        "SUMUP *TIRAMISUPER", "TIRAMISU",
+        "LS LOCALS TO GO", "LS FONDA",
+        "RESTAURANT DE KOLK", "AVANI MUSEUM",
+        "TEA GUYS AMSTERDAM", "FIASCHETTERIA",
+        "SIMON MEIJSSEN", "VOLENDAMMER",
+        "BACK TO BLACK", "LS 770 SUMSUM",
+        "HMS HOST", "REFFEN",
+        "NYX*SIDESAPS",
+        "SAIGON BILLIARDS", "BEACH CITIES TOYOTA"
+      ],
+      "group": "Personal",
+      "category": "Entertainment",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["ALINEA INVEST", "ALINEA INV"],
+      "group": "Savings",
+      "category": "Investment Account Transfer",
+      "confidence": "high",
+      "_note": "Alinea is an investing app"
+    },
+    {
+      "keywords": ["WEBULL"],
+      "group": "Savings",
+      "category": "Webull",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["FIDELITY"],
+      "group": "Savings",
+      "category": "Fidelity",
+      "confidence": "high"
+    },
+    {
+      "keywords": ["TRANSFER FROM CD", "CD XXXXXXXX", "BOOK TRANSFER CREDIT"],
+      "group": "Income",
+      "category": "Family Support",
+      "confidence": "high",
+      "_note": "Book Transfer Credit = parents wiring school fees directly (Sept 2025 memo: SCHOOL FEE FOR VUONG NGOC THIEN KIM). Also catches CD withdrawals."
+    },
+    {
+      "keywords": ["PLANETTAXFREE", "PLANET TAX FREE"],
+      "group": "Income",
+      "category": "Refund",
+      "confidence": "high",
+      "_note": "VAT tax refund from international shopping (Netherlands)"
+    },
+    {
+      "keywords": ["CASH REDEMPTION", "LINK.COM", "REAL TIME PAYMENT CREDIT"],
+      "group": "Income",
+      "category": "Refund",
+      "confidence": "high",
+      "_note": "Credit card rewards or cashback credits"
+    },
+    {
+      "keywords": [
+        "SOFI SAVINGS", "ALLY BANK", "MARCUS", "HIGH YIELD",
+        "SAVINGS TRANSFER", "TRANSFER TO SAVINGS",
+        "ONLINE TRANSFER FROM SAV", "TRANSFER FROM SAV",
+        "ONLINE TRANSFER TO SAV", "TRANSFER TO SAV"
+      ],
+      "group": "Savings",
+      "category": "Money Transfer to Savings Account",
+      "confidence": "high",
+      "_note": "Internal transfers between Chase checking and savings accounts — not real income or spending"
+    },
+    {
+      "keywords": ["CHASE CREDIT CRD", "AUTOPAY", "CREDIT CARD PAYMENT", "CC PAYMENT", "PAYMENT TO CHASE CARD", "CHASE CARD ENDING", "LOAN_PMT", "LOAN PMT"],
+      "group": "Credit Card",
+      "category": "CC Payment - Exclude from Spending",
+      "confidence": "high",
+      "_note": "Not real spending — just moving money to pay off your card"
+    },
+    {
+      "keywords": ["TARGET"],
+      "group": "Food",
+      "category": "Groceries",
+      "confidence": "medium",
+      "_note": "Target — classified as groceries/necessities per Kim's preference. Could include clothing or personal items — manually review large amounts if needed."
+    },
+    {
+      "keywords": ["AMAZON", "AMZN", "AMZNMktplace", "AMAZON MKTPL", "AMAZON.COM", "amazon.co.uk", "KINOKUNIYA", "ARITZIA"],
+      "group": "Personal",
+      "category": "Shopping",
+      "confidence": "medium",
+      "_note": "Amazon — classified as Shopping per Kim's preference. Individual items may vary (books, school supplies, etc.) — manually review large amounts if needed."
+    },
+    {
+      "keywords": ["ATM WITHDRAWAL", "CASH WITHDRAWAL"],
+      "group": "Unknown",
+      "category": "Needs Review",
+      "confidence": "low",
+      "_note": "Cash withdrawal — unclear what it was spent on"
+    },
+    {
+      "keywords": ["ZELLE TO", "ZELLE FROM"],
+      "group": "Unknown",
+      "category": "Needs Review",
+      "confidence": "low",
+      "_note": "Generic Zelle — specific person rules above catch known contacts first. Unknown contacts flagged here."
+    }
+  ]
+}
