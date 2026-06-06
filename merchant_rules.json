@@ -506,11 +506,11 @@
       "_note": "Internal transfers between Chase checking and savings accounts — not real income or spending"
     },
     {
-      "keywords": ["CHASE CREDIT CRD", "AUTOPAY", "CREDIT CARD PAYMENT", "CC PAYMENT", "PAYMENT TO CHASE CARD", "CHASE CARD ENDING", "LOAN_PMT", "LOAN PMT"],
+      "keywords": ["CHASE CREDIT CRD", "AUTOPAY", "CREDIT CARD PAYMENT", "CC PAYMENT", "PAYMENT TO CHASE CARD", "CHASE CARD ENDING", "LOAN_PMT", "LOAN PMT", "PAYMENT THANK YOU", "AUTOMATIC PAYMENT - THANK", "PAYMENT THANK YOU-MOBILE"],
       "group": "Credit Card",
       "category": "CC Payment - Exclude from Spending",
       "confidence": "high",
-      "_note": "Not real spending — just moving money to pay off your card"
+      "_note": "Not real spending — just moving money to pay off your card. Also catches credit card statement payment confirmations."
     },
     {
       "keywords": ["TARGET"],
