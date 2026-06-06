@@ -108,6 +108,13 @@
       "_note": "Monthly utility payment"
     },
     {
+      "keywords": ["ROOMRS"],
+      "group": "Housing",
+      "category": "Rent",
+      "confidence": "high",
+      "_note": "Roomrs — housing/roommate platform. Counts toward Housing > Rent."
+    },
+    {
       "keywords": ["RENT", "APARTMENT", "PROPERTY MGMT", "GREYSTAR", "EQUITY RESIDENTIAL", "PYL*AMERICAN CAMPUS", "AMERICAN CAMPUS CO", "AARON JAMES JOHNSON", "AARON JOHNSON", "RIYA JPM"],
       "group": "Housing",
       "category": "Rent",
@@ -159,6 +166,10 @@
         "DUCK DONUTS", "SEASIDE DONUTS", "PINK PIG",
         "SQ *SOMISOMI", "SOMISOMI", "HANDEL'S HOMEMAD",
         "YOGURT AMERICA", "WANDERLUST CREAMERY", "YOGURTLAND",
+        "RONDE BAR", "SP LITTLE TOKYO TABLE", "SP THE INCONVENIENCE",
+        "SQ *ARCHIVES OF US", "ZEST", "CIELO WILLEMSTAD",
+        "YAMAZAKI CALIFORNIA", "YAMAZAKI",
+        "THE PMA STORE",
         "HOUSE OF FRIES", "FIRMA STROOP", "RESTAURANT DE KOLK",
         "LE ROY D ESPAGNE", "REFFEN", "FIASCHETTERIA", "SEAFOOD BAR"
       ],
@@ -415,6 +426,13 @@
       "category": "Living",
       "confidence": "high",
       "_note": "Laundry — Housing > Living. Counts toward housing and living costs, not personal grooming."
+    },
+    {
+      "keywords": ["AIRBNB", "EXPEDIA", "HOTELS.COM", "BOOKING.COM", "VRBO", "KAYAK"],
+      "group": "Personal",
+      "category": "Entertainment",
+      "confidence": "high",
+      "_note": "Travel/lodging platforms — classified as Entertainment per Kim's preference."
     },
     {
       "keywords": [
