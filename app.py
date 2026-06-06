@@ -357,6 +357,18 @@ SUBSCRIPTION_KEYWORDS = [
 # RECURRING DETECTION
 # ══════════════════════════════════════════════════════════════════════════════
 
+def normalize_desc(desc):
+    """Strip random trailing codes so 'AMAZON MKTPL*M76FJ18' and 'AMAZON MKTPL*BV1W652' group together."""
+    import re as _re
+    d = str(desc).upper().strip()
+    d = _re.sub(r'^(POS DEBIT\s+|DEBIT CARD PURCHASE\s+)', '', d)
+    d = d.split('*')[0].strip()                          # strip after *
+    d = _re.sub(r'\s+\d{6,}.*$', '', d)                 # strip long trailing numbers
+    d = _re.sub(r'\s+[A-Z]{2}\d*\s*$', '', d)           # strip trailing state codes
+    d = _re.sub(r'\s+', ' ', d).strip()
+    return ' '.join(d.split()[:5])                       # first 5 words
+
+
 def detect_recurring(df):
     """Find outflow transactions appearing 2+ times — estimated recurring charges."""
     df2 = df.copy()
@@ -366,12 +378,16 @@ def detect_recurring(df):
     if outflows.empty:
         return pd.DataFrame()
 
-    grp = outflows.groupby("description").agg(
+    # Normalize descriptions so random codes don't prevent grouping
+    outflows["norm_key"] = outflows["description"].apply(normalize_desc)
+
+    grp = outflows.groupby("norm_key").agg(
         count=("amount", "count"),
         avg_amount=("amount", "mean"),
         last_date=("date_parsed", "max"),
         category=("category", "first"),
         group=("group", "first"),
+        description=("description", "first"),   # keep one sample for display
     ).reset_index()
 
     recurring = grp[grp["count"] >= 2].copy()
@@ -383,7 +399,7 @@ def detect_recurring(df):
         if row["group"] in RECURRING_EXCLUDE_GROUPS:
             continue
 
-        dates = outflows[outflows["description"] == row["description"]]["date_parsed"].dropna().sort_values()
+        dates = outflows[outflows["norm_key"] == row["norm_key"]]["date_parsed"].dropna().sort_values()
         if len(dates) >= 2:
             gaps = [(dates.iloc[i+1] - dates.iloc[i]).days for i in range(len(dates)-1)]
             avg_gap = sum(gaps) / len(gaps)
@@ -429,6 +445,7 @@ def detect_recurring(df):
             "freq":            freq,
             "next_date":       next_date,
             "monthly_equiv":   monthly_equiv,
+            "norm_key":        row["norm_key"],
         })
 
     return pd.DataFrame(results) if results else pd.DataFrame()
@@ -622,6 +639,7 @@ def render_sidebar():
             "📤  Upload",
             "📊  Dashboard",
             "📅  Monthly",
+            "🔁  Subscriptions",
             "⚠️  Review Queue",
             "📋  Transactions",
             "📥  Export",
@@ -645,32 +663,52 @@ def render_sidebar():
 # ══════════════════════════════════════════════════════════════════════════════
 
 def page_upload(rules):
-    st.title("Upload Bank Statement")
-    st.caption("Drop your Chase CSV — every transaction is classified automatically using your rulebook.")
+    st.title("Upload Statements")
+    st.caption("Upload your Chase bank statement and/or credit card CSVs — all are merged and classified together.")
     st.markdown("---")
     c1, c2 = st.columns([2, 1])
     with c1:
-        uploaded = st.file_uploader("Chase CSV", type=["csv","CSV"], label_visibility="collapsed")
-        if uploaded:
+        uploaded_files = st.file_uploader(
+            "Chase CSV files (bank + credit cards)",
+            type=["csv","CSV"],
+            accept_multiple_files=True,
+            label_visibility="collapsed"
+        )
+        if uploaded_files:
             with st.spinner("Classifying…"):
                 try:
-                    raw  = parse_chase_csv(uploaded)
-                    if raw.empty:
-                        st.error("Could not read transactions — the CSV may be empty or have unexpected column names. Expected columns: Transaction Date (or Posting Date), Description, Amount.")
+                    all_raw = []
+                    file_names = []
+                    for uploaded in uploaded_files:
+                        raw = parse_chase_csv(uploaded)
+                        if not raw.empty:
+                            raw["source"] = uploaded.name
+                            all_raw.append(raw)
+                            file_names.append(uploaded.name)
+
+                    if not all_raw:
+                        st.error("Could not read transactions from any file. Check that these are Chase CSV exports.")
                         st.stop()
-                    proc = process_transactions(raw, rules)
+
+                    combined_raw = pd.concat(all_raw, ignore_index=True)
+                    # Deduplicate same transaction appearing in multiple files
+                    combined_raw = combined_raw.drop_duplicates(subset=["date","description","amount"])
+                    combined_raw = combined_raw.sort_values("date_sort", ascending=False).reset_index(drop=True)
+
+                    proc = process_transactions(combined_raw, rules)
                     if proc.empty or "category" not in proc.columns:
-                        st.error("Processing returned no transactions. Check that the file is a Chase checking or credit card CSV export.")
+                        st.error("Processing returned no transactions. Check that the files are Chase checking or credit card CSV exports.")
                         st.stop()
                     set_df(proc)
-                    st.session_state["filename"] = uploaded.name
+                    label = " + ".join(file_names)
+                    st.session_state["filename"] = label
                 except Exception as e:
                     st.error(f"Could not read file: {e}")
                     with st.expander("Debug — CSV columns found"):
                         try:
-                            uploaded.seek(0)
+                            uploaded_files[0].seek(0)
                             import pandas as _pd
-                            _df = _pd.read_csv(uploaded, nrows=2)
+                            _df = _pd.read_csv(uploaded_files[0], nrows=2)
                             st.write("Columns:", _df.columns.tolist())
                             st.write("First row:", _df.head(1))
                         except Exception:
@@ -684,7 +722,9 @@ def page_upload(rules):
             ok      = len(df) - flagged
             inc_sum = df[df["amount"] > 0]["amount"].sum()
             sp_sum  = spending_subset(df)["amount"].abs().sum()
-            st.success(f"✅  Loaded **{len(df)}** transactions from `{uploaded.name}`")
+            label   = st.session_state.get("filename", "")
+            st.success(f"✅  Loaded **{len(df)}** transactions from {len(uploaded_files)} file(s)")
+            st.caption(label)
             st.markdown("---")
             m1,m2,m3,m4 = st.columns(4)
             m1.metric("Transactions", len(df))
@@ -697,7 +737,8 @@ def page_upload(rules):
             if st.button("Clear and upload new file"): st.session_state.pop("df",None); st.rerun()
     with c2:
         st.markdown("**How to download from Chase**")
-        st.markdown("1. Log into chase.com\n2. Click your checking account\n3. Download → CSV\n4. Upload here")
+        st.markdown("1. Log into chase.com\n2. Click your account (checking or credit card)\n3. Download → CSV\n4. Upload all files here at once")
+        st.caption("You can select multiple files at once when uploading.")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1360,6 +1401,124 @@ def page_transactions():
 # PAGE 6 — EXPORT
 # ══════════════════════════════════════════════════════════════════════════════
 
+def page_subscriptions():
+    st.title("🔁 Subscriptions Scanner")
+    df = get_df()
+    if df is None:
+        st.warning("Go to **Upload** first."); return
+
+    st.caption("Detects recurring fixed-amount charges across your transaction history.")
+
+    # Known subscription keywords to scan for even if only seen once
+    KNOWN_SUB_KEYWORDS = [
+        "NETFLIX","SPOTIFY","HULU","DISNEY","HBO","PEACOCK","PARAMOUNT",
+        "YOUTUBE PREMIUM","AMAZON PRIME","AMAZON VIDEO","PRIME VIDEO",
+        "APPLE.COM","ICLOUD","GOOGLE ONE","DROPBOX","ONEDRIVE",
+        "CHATGPT","OPENAI","CLAUDE","ANTHROPIC","PERPLEXITY","CURSOR",
+        "MIDJOURNEY","NOTION","ADOBE","MICROSOFT 365","GITHUB","FIGMA",
+        "LINKEDIN","CLASSPASS","CLASS PASS","PLANET FITNESS","EQUINOX",
+        "CRUNCHYROLL","AUDIBLE","KINDLE","DUOLINGO","CALM","HEADSPACE",
+        "TIDAL","SOUNDCLOUD","APPLE MUSIC","YOUTUBE","TWITCH",
+        "SIMPLIFY","ALLTRAILS","INSTA360","POPPIN","QUIZLET",
+        "WWW.PERPLEXITY","HELPCOURSER","WEPA CAMPUS",
+    ]
+
+    df2 = df.copy()
+    df2["date_parsed"] = pd.to_datetime(df2["date"], errors="coerce")
+    df2["month"] = df2["date_parsed"].dt.to_period("M")
+    outflows = df2[df2["amount"] < 0].copy()
+    outflows["norm_key"] = outflows["description"].apply(normalize_desc)
+
+    # ── Section 1: Recurring (same merchant, fixed amount, 2+ months) ──────────
+    grp = outflows.groupby("norm_key").agg(
+        months=("month", lambda x: x.nunique()),
+        count=("amount", "count"),
+        avg_amount=("amount", "mean"),
+        std=("amount", "std"),
+        last_date=("date_parsed", "max"),
+        category=("category", "first"),
+        group=("group", "first"),
+        sample=("description", "first"),
+    ).reset_index()
+    grp["avg_amount"] = grp["avg_amount"].abs()
+    grp["std"] = grp["std"].fillna(0)
+
+    recurring_subs = grp[
+        (grp["months"] >= 2) &
+        (grp["std"] < 3) &
+        (~grp["group"].isin(["Food","Income","Savings","Credit Card","Unknown","Other"]))
+    ].sort_values("avg_amount", ascending=False)
+
+    # ── Section 2: Known subscription keywords (even if seen once) ─────────────
+    def is_known_sub(desc):
+        d = str(desc).upper()
+        return any(kw in d for kw in KNOWN_SUB_KEYWORDS)
+
+    known_hits = outflows[outflows["description"].apply(is_known_sub)].copy()
+    known_grp = known_hits.groupby("norm_key").agg(
+        months=("month", lambda x: x.nunique()),
+        count=("amount", "count"),
+        avg_amount=("amount", "mean"),
+        last_date=("date_parsed", "max"),
+        category=("category", "first"),
+        sample=("description", "first"),
+    ).reset_index()
+    known_grp["avg_amount"] = known_grp["avg_amount"].abs()
+
+    # ── Display: confirmed recurring ───────────────────────────────────────────
+    st.markdown("### Confirmed Recurring Charges")
+    st.caption("Same merchant, fixed amount, seen in 2+ months.")
+
+    if recurring_subs.empty:
+        st.info("No confirmed recurring charges found. Upload more months of history for better detection.")
+    else:
+        total_monthly = 0
+        for _, r in recurring_subs.iterrows():
+            monthly = r["avg_amount"]
+            total_monthly += monthly
+            next_dt = r["last_date"] + pd.Timedelta(days=30)
+            col1, col2, col3, col4 = st.columns([3, 1.5, 1.5, 2])
+            with col1:
+                st.markdown(f"**{clean_merchant_name(r['sample'])}**")
+                st.caption(r["category"])
+            with col2:
+                st.markdown(f"**${monthly:.2f}/mo**")
+            with col3:
+                st.caption(f"{int(r['months'])} months seen")
+            with col4:
+                st.caption(f"Next ~{next_dt.strftime('%b %d')}")
+            st.divider()
+
+        st.markdown(f"**Total recurring: ${total_monthly:.2f}/month · ${total_monthly*12:.0f}/year**")
+
+    # ── Display: known subscriptions ───────────────────────────────────────────
+    st.markdown("---")
+    st.markdown("### Known Subscription Services Detected")
+    st.caption("Matched against a list of 30+ common subscription services.")
+
+    if known_grp.empty:
+        st.info("No known subscription services found in your transactions.")
+    else:
+        for _, r in known_grp.sort_values("avg_amount", ascending=False).iterrows():
+            col1, col2, col3 = st.columns([3, 2, 2])
+            with col1:
+                st.markdown(f"**{clean_merchant_name(r['sample'])}**")
+                st.caption(r["category"])
+            with col2:
+                st.markdown(f"**${r['avg_amount']:.2f}**")
+                st.caption(f"{int(r['count'])}x total")
+            with col3:
+                st.caption(f"Last: {r['last_date'].strftime('%b %d, %Y') if pd.notna(r['last_date']) else '—'}")
+            st.divider()
+
+    # ── Reminder ───────────────────────────────────────────────────────────────
+    st.markdown("---")
+    st.info(
+        "**Tip:** Upload your bank statement + all credit card CSVs together on the Upload page "
+        "for full subscription coverage. Subscriptions on credit cards will then appear here automatically."
+    )
+
+
 def page_export():
     st.title("Export")
     df = get_df()
@@ -1417,6 +1576,7 @@ def main():
     if   page == "📤  Upload":       page_upload(rules)
     elif page == "📊  Dashboard":    page_dashboard()
     elif page == "📅  Monthly":      page_monthly()
+    elif page == "🔁  Subscriptions": page_subscriptions()
     elif page == "⚠️  Review Queue": page_review_queue()
     elif page == "📋  Transactions": page_transactions()
     elif page == "📥  Export":       page_export()

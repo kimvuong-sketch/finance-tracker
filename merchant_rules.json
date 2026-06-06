@@ -158,7 +158,7 @@
         "MASHTI MALONE", "ARAMARK", "MELOMELO", "PIGGY PIGGY",
         "DUCK DONUTS", "SEASIDE DONUTS", "PINK PIG",
         "SQ *SOMISOMI", "SOMISOMI", "HANDEL'S HOMEMAD",
-        "YOGURT AMERICA", "WANDERLUST CREAMERY",
+        "YOGURT AMERICA", "WANDERLUST CREAMERY", "YOGURTLAND",
         "HOUSE OF FRIES", "FIRMA STROOP", "RESTAURANT DE KOLK",
         "LE ROY D ESPAGNE", "REFFEN", "FIASCHETTERIA", "SEAFOOD BAR"
       ],
@@ -339,6 +339,13 @@
       "confidence": "high"
     },
     {
+      "keywords": ["JOBRIGHT.AI", "JOBRIGHT"],
+      "group": "Subscriptions",
+      "category": "Apps",
+      "confidence": "high",
+      "_note": "Jobright.ai — job search tool. $19.99/month on Unlimit card."
+    },
+    {
       "keywords": ["ICLOUD", "GOOGLE ONE", "DROPBOX", "ONEDRIVE"],
       "group": "Subscriptions",
       "category": "Cloud Storage",
@@ -363,7 +370,7 @@
         "PAYPAL *ON SPORTSWE", "ON SPORTSWE",
         "CITADEL OUTLETS", "OUTLETS",
         "BRANDY MELVILLE", "BRANDY MEL",
-        "FREE PEOPLE", "PRINCESS POLLY", "REVOLVE",
+        "FREE PEOPLE", "PRINCESS POLLY", "PAYPAL *PRINCESSPOL", "REVOLVE",
         "TJ MAXX", "TJMAXX",
         "COS  0883", "STUSSY",
         "SP MOTELROCKS", "MOTELROCKS",
@@ -421,7 +428,7 @@
         "SCHOOLFUNDR",
         "LADERACH", "BOOTH BY BRYANT", "BOOTHBYBRYANT",
         "BOOMERS", "RANCHO SAN JOAQUIN",
-        "YOGURTLAND", "INSOMNIA COOKIES",
+        "INSOMNIA COOKIES",
         "SWEETFIN", "ACAI",
         "BLUE BOWL", "PRESSED JUICERY",
         "PI DELTA CHAPTER",
